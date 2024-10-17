@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <title>Workhuman Assessment</title>
+    <script>
+        // function to search for countries
+        function searchCountries() {
+            // get the value of the search input
+            const query = document.getElementById('search').value;
+
+            // fetch the data from the server
+            fetch(`php/search.php?query=${query}`)
+                .then(response => response.json())
+                .then(data => {
+
+                    const resultsDiv = document.getElementById('results');
+                    resultsDiv.innerHTML = '';  // clear previous results
+
+                    // loop through the data and display the results, ensuring it formats correctly for the table
+                    if (data.length > 0) {
+                        data.forEach(country => {
+                            const tr = document.createElement('tr');
+                            const td = document.createElement('td');
+                            td.textContent = country.name;
+                            tr.appendChild(td);
+                            resultsDiv.appendChild(tr); // append to the correct element
+                        });
+                    } else {
+                        // display "No results found" if no match is found
+                        const tr = document.createElement('tr');
+                        const td = document.createElement('td');
+                        td.textContent = 'No results found';
+                        tr.appendChild(td);
+                        resultsDiv.appendChild(tr); // append to the correct element
+                    }
+                });
+        }
+    </script>
+</head>
+
+<body>
+
+    <!-- top text -->
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-10 col-md-8 mx-auto">
+                <h1 class="fw-dark">Workhuman Assessment</h1>
+                <p class="text-muted">This is a simple web application that allows you to search for a country by name.
+                </p>
+                <hr>
+            </div>
+        </div>
+    </section>
+
+    <!-- instructions and search -->
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Instructions</h2>
+                    <p>Enter a country name in the search box and click the search button to find the country you
+                        are looking for.</p>
+                    <p>If the country you are looking for is found, the name of the country will be displayed below.
+                        If the country is not found, a message will be displayed indicating that no results
+                        were
+                        found.</p>
+                </div>
+                <div class="col-md-6">
+                    <h2>Search for a Country</h2>
+                    <input type="text" id="search" placeholder="Enter a country name" class="form-control mb-3" />
+                    <button onclick="searchCountries()" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- search results -->
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-10 col-md-8 mx-auto">
+                <h2 class="fw-dark"> Search Results</h2>
+                <hr>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Country Name</th>
+                        </tr>
+                    </thead>
+                    <tbody id="results">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- simple footer -->
+    <footer class="footer01 text-white bg-dark py-2 fixed-bottom">
+        <div class="container text-center">
+            <p class="mb-0">Workhuman Assesment, Noel McCarthy. Student Email: C22533826@mytudublin.ie</p>
+        </div>
+    </footer>
+
+</body>
+
+</html>
