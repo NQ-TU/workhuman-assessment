@@ -1,5 +1,6 @@
 # Workhuman Assessment
 This is a simple web application that allows users to search for a country by name, or through a partial search. E.g., eden will return Sweden. 
+![Image of Web Page](images/web-page.png)
 
 ## Installation
 To run this locally on your own machine clone this repository, use XAMPP or another PHP server set up on your machine and run it, then navigate to https://localhost/workhuman-assessment/php/create_db.php to create the database, then access index.html for the program functionality. 
